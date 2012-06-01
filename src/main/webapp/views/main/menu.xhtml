@@ -2,30 +2,34 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
 	xmlns:h="http://java.sun.com/jsf/html">
-  <div>
-	<h:form>
-	  <ul>
-		<li>
-		  <h:commandLink action="home?faces-redirect=true">
-			<h:outputText value="#{msg.linkHome}" />
-		  </h:commandLink>
-		</li>
-		<li>
-		  <h:commandLink action="add?faces-redirect=true">
-			<h:outputText value="#{msg.personAddLabel}" />
-		  </h:commandLink></li>
-		<li>
-		  <h:commandLink action="showPersons?faces-redirect=true">
-			 <h:outputText value="#{msg.personAllLabel}" />
-		  </h:commandLink>
-		</li>
-		<li>
-		  <h:commandLink action="sell">
-			 <h:outputText value=" Sell car" />
-		  </h:commandLink>
-		</li>
-	</ul>
-   </h:form>
-  </div>
+	<div>
+		<h:form>
+		<center>
+			<h:commandButton action="home?faces-redirect=true" value="#{msg.linkHome}" styleClass="myButton"/>
+			</center>
+			<center>
+			<h:commandButton action="addArchive?faces-redirect=true" value="#{msg.linkAdd}" styleClass="myButton"/>
+			</center>
+			<center>
+			<h:commandButton action="deleteArchive?faces-redirect=true" value="#{msg.linkDelete}" styleClass="myButton"/>
+			</center>
+			<center>
+			<h:commandButton action="showArchives?faces-redirect=true" value="#{msg.linkShow}" styleClass="myButton"/>
+			</center>
+			<center>
+			<h:commandButton action="addResource?faces-redirect=true" value="Dodaj zasób" styleClass="myButton"/>
+			</center>
+			<center>
+			<h:commandButton action="deleteResource?faces-redirect=true" value="Usuń zasób" styleClass="myButton"/>
+			</center>
+			<center>
+			<h:commandButton action="showResources?faces-redirect=true" value="Nieprzydzielone zasoby" styleClass="myButton"/>
+			</center>
+			<center>
+			<h:commandButton action="assign?faces-redirect=true" value="Przydziel zasób" styleClass="myButton"/>
+			</center>
+		</h:form>
+	</div>
 </ui:composition>

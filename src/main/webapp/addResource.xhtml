@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<h:form id="resourceForm">
+		<h:outputScript name="jsf.js" library="javax.faces" target="head"/>
+		<h:panelGrid columnClasses="panel" border="0" columns="2" >
+		<rich:panel>
+		<f:facet name="header">Dodaj zasób</f:facet>
+		<rich:panel>
+                Dodaj zasób do katalogu zasobów poprzez 
+                wypełnienie poniższego formularza. Wszystkie zmiany 
+                możesz edytować w następnym kroku. Uważaj na poprawność 
+                danych.
+        </rich:panel>
+        <rich:panel>
+			<h:panelGrid columns="2">
+			<f:ajax execute="@form" render="@form">
+				<h:outputText value="#{msg.archiveNameLabel}" />
+				<h:inputText id="name" value="#{resourceBean.resource.name}"
+					required="#{true}" />
+
+				<h:outputText value="Rocznik początkowy" />
+				 <rich:inputNumberSlider value="#{resourceBean.resource.yearFrom}" width="1000" minValue="1200" maxValue="2012"
+        		step="1" showArrows="true" showTooltip="false" disabled="false" />
+
+				<h:outputText value="Rocznik końcowy" />
+				<rich:inputNumberSlider value="#{resourceBean.resource.yearTo}" width="1000" minValue="1200" maxValue="2012"
+        		step="1" showArrows="true" showTooltip="false" disabled="false" />
+				
+				<h:outputText value="Zawartość" />
+				<h:inputText id="content" value="#{resourceBean.resource.content}" />
+
+				<h:outputText value="Data wprowadzenia" />
+				<rich:calendar value="#{resourceBean.resource.introductionDate}"
+					id="calendar" datePattern="dd.MM.yyyy" showApplyButton="#{true}"
+					cellWidth="24px" cellHeight="22px" style="width:200px">
+					<a4j:ajax render="messages" execute="@this" />
+				</rich:calendar>
+
+			<h:commandButton value="#{msg.formOKButton}"
+				action="#{resourceBean.addResource}" />
+		</f:ajax>
+		</h:panelGrid>
+		<h:panelGrid>
+		<h:messages showDetail="#{true}" showSummary="#{false}" />
+		</h:panelGrid>
+		</rich:panel>
+		<rich:panel>			
+			<h:panelGrid>
+				<h:outputText value="#{msg.archiveShow}" />
+				<h:outputText value="#{resourceBean.resource.name}"/>
+				<h:outputText value="#{resourceBean.resource.yearFrom}"/>
+				<h:outputText value="#{resourceBean.resource.yearTo}"/>
+				<h:outputText value="#{resourceBean.resource.content}"/>
+				<h:outputText value="#{resourceBean.resource.introductionDate}" >
+						<f:convertDateTime type="date" pattern="dd.MM.yyyy" />
+				</h:outputText>
+			</h:panelGrid>
+		</rich:panel>
+		</rich:panel>
+		</h:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

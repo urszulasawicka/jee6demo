@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/templates/default.xhtml">
+	<ui:define name="content">
+
+		<h:form id="archiveform">
+		<h:panelGrid>
+		<f:facet name="header">#{msg.linkUpdate}</f:facet>
+			<h:panelGrid columns="2">
+					<h:outputText value=" "/>
+					<p><h:outputText value="#{msg.personNameLabel}" /></p>
+					<h:selectOneMenu value="#{resourceBean.resource.id}">
+			 			<f:selectItems value="#{resourceBean.allResources}" var="item"
+			 						itemLabel="#{item.name}" itemValue="#{item.id}" />
+						<f:ajax render="@form" />
+					</h:selectOneMenu>
+					<br />
+			</h:panelGrid>
+		<h:outputScript name="jsf.js" library="javax.faces" target="head"/>
+			<f:ajax execute="@form" render="@form">
+			<h:panelGrid columns="2">
+				<h:outputText value="#{msg.archiveNameLabel}" />
+				<h:inputText id="name" value="#{resourceBean.resource.name}"
+					required="#{true}" />
+
+				<h:outputText value="#{msg.archiveAddressLabel}" />
+				<h:inputText id="yearFrom" value="#{resourceBean.resource.yearFrom}" />
+
+				<h:outputText value="#{msg.archiveCityLabel}" />
+				<h:inputText id="yearTo" value="#{resourceBean.resource.yearTo}" />
+				
+				<h:outputText value="#{msg.archiveTelLabel}" />
+				<h:inputText id="content" value="#{resourceBean.resource.content}" />
+
+				<h:outputText value="#{msg.archiveTelLabel}" />
+				<rich:calendar value="#{resourceBean.resource.introductionDate}"
+					id="calendar" datePattern="dd.MM.yyyy" showApplyButton="#{true}"
+					cellWidth="24px" cellHeight="22px" style="width:200px">
+					<a4j:ajax render="messages" execute="@this" />
+				</rich:calendar>
+				<h:commandButton value="#{msg.personFormOKButton}" 
+					action="#{resourceBean.updateResource}"/>
+			</h:panelGrid>
+			</f:ajax>
+			<h:panelGrid>
+				<h:messages showDetail="#{true}" showSummary="#{false}" />
+			</h:panelGrid>
+			<h:panelGrid>
+				<h:messages showDetail="#{true}" showSummary="#{false}" />
+			</h:panelGrid>
+			<rich:panel>			
+			<h:panelGrid>
+				<h:outputText value="#{msg.archiveShow}" />
+				<h:outputText value="#{resourceBean.resource.name}"/>
+				<h:outputText value="#{resourceBean.resource.yearFrom}"/>
+				<h:outputText value="#{resourceBean.resource.yearTo}"/>
+				<h:outputText value="#{resourceBean.resource.content}"/>
+				<h:outputText value="#{resourceBean.resource.introductionDate}" >
+						<f:convertDateTime type="date" pattern="dd.MM.yyyy" />
+				</h:outputText>
+			</h:panelGrid>
+		</rich:panel>
+			</h:panelGrid>
+			</h:form>
+		
+	</ui:define>
+</ui:composition>

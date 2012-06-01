@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/templates/default.xhtml">
+
+	<ui:define name="content">
+		<h:form>
+		<rich:panel>
+		<rich:dataScroller for="table" maxPages="5" />
+        <rich:dataTable value="#{archiveBean.allArchives}" var="item"
+        	id="table" rows="4">
+				<f:facet name="header">#{msg.archiveAllLabel}</f:facet>
+				<h:column>
+					<f:facet name="header">#{msg.archiveNameLabel}</f:facet>
+					<h:outputText value="#{item.name}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg.archiveAddressLabel}</f:facet>
+					<h:outputText value="#{item.address}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">#{msg.archiveCityLabel}</f:facet>
+					<h:outputText value="#{item.city}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">#{msg.archiveTelLabel}</f:facet>
+					<h:outputText value="#{item.tel}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">#{msg.action}</f:facet>
+					<h:commandLink value="#{msg.actionDelete}"
+						action="#{archiveBean.deleteArchive}" />
+					<h:commandLink value=" Details " action="#{archiveBean.showDetailsArchive}"/>
+				</h:column>
+			</rich:dataTable>
+		<rich:dataScroller for="table" maxPages="5" />
+		</rich:panel>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

@@ -1,8 +1,8 @@
 #!/bin/sh
 
 echo "************ UNDEPLOYING *******************"
-asadmin undeploy jeedemo
+/opt/devel/as/glassfish3/glassfish/bin/asadmin undeploy jeedemo
 echo "************ BUILDING **********************"
 mvn package
 echo "************ DEPLOYING *********************"
-asadmin deploy target/jeedemo.war
+/opt/devel/as/glassfish3/glassfish/bin/asadmin deploy target/jeedemo.war

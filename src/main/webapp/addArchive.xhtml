@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+	<ui:define name="content">
+		<h:form id="archiveForm">
+		<h:outputScript name="jsf.js" library="javax.faces" target="head"/>
+		<h:panelGrid columnClasses="panel" border="0" columns="2" >
+		<rich:panel>
+		<f:facet name="header">#{msg.linkAdd}</f:facet>
+		<rich:panel>
+                Dodaj archiwum do katalogu Archiw Polskich poprzez 
+                wypełnienie poniższego formularza. Wszystkie zmiany 
+                możesz edytować w następnym kroku. Uważaj na poprawność 
+                danych.
+        </rich:panel>
+        <rich:panel>
+			<h:panelGrid columns="2">
+			<f:ajax execute="@form" render="@form">
+				<f:event listener="#{archiveBean.validateTel}" type="postValidate" />
+				<h:outputText value="#{msg.archiveNameLabel}" />
+				<h:inputText id="name" value="#{archiveBean.archive.name}"
+					required="#{true}" />
+
+				<h:outputText value="#{msg.archiveAddressLabel}" />
+				<h:inputText id="address" value="#{archiveBean.archive.address}" />
+
+				<h:outputText value="#{msg.archiveCityLabel}" />
+				<h:inputText id="city" value="#{archiveBean.archive.city}" />
+				
+				<h:outputText value="#{msg.archiveTelLabel}" />
+				<h:inputText id="tel" value="#{archiveBean.archive.tel}" />
+
+			<h:commandButton value="#{msg.formOKButton}"
+				action="#{archiveBean.addArchive}" />
+		</f:ajax>
+		</h:panelGrid>
+		<h:panelGrid>
+		<h:messages showDetail="#{true}" showSummary="#{false}" />
+		</h:panelGrid>
+		</rich:panel>
+		<rich:panel>			
+			<h:panelGrid>
+				<h:outputText value="#{msg.archiveShow}" />
+				<h:outputText value="#{archiveBean.archive.name}"/>
+				<h:outputText value="#{archiveBean.archive.address}"/>
+				<h:outputText value="#{archiveBean.archive.city}"/>
+				<h:outputText value="#{archiveBean.archive.tel}"/>
+			</h:panelGrid>
+		</rich:panel>
+		</rich:panel>
+		</h:panelGrid>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

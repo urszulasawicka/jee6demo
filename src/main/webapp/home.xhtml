@@ -3,8 +3,40 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
 	template="/templates/default.xhtml">
 	<ui:define name="content">
 		<p>#{msg.applicationInfo}</p>
+		<h:form id="form">
+        <h:panelGrid columns="2" columnClasses="cols,cols" width="400">
+            <rich:panelMenu style="width:200px" itemMode="ajax" groupMode="ajax"
+                groupExpandedLeftIcon="triangleUp"
+                groupCollapsedLeftIcon="triangleDown"
+                topGroupExpandedRightIcon="chevronUp"
+                topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc"
+                itemChangeListener="#{panelMenuBean.updateCurrent}">
+                <rich:panelMenuGroup label="ARCHIWUM">
+                    <rich:panelMenuItem label="DODAJ ARCHIWUM" name="dodaj_archiwum" action="addArchive?faces-redirect=true" />
+                    <rich:panelMenuItem label="USUŃ ARCHIWUM" name="usun_archiwum" action="deleteArchive?faces-redirect=true" />
+                    <rich:panelMenuItem label="POKAŻ ARCHIWA" name="pokaz_archiwa" action="showArchives?faces-redirect=true" />
+                </rich:panelMenuGroup>
+                <rich:panelMenuGroup label="ZASÓB">
+                    <rich:panelMenuItem label="DODAJ ZASÓB" name="dodaj_zasob" action="addResource?faces-redirect=true" />
+                    <rich:panelMenuItem label="USUŃ ZASÓB" name="usun_zasob" action="deleteResource?faces-redirect=true" />
+                    <rich:panelMenuItem label="NIEPRZYDZIELONE ZASOBY" name="pokaz_zasoby" action="showResources?faces-redirect=true" />
+                    <rich:panelMenuGroup label="PRZYDZIELANIE">
+                        <rich:panelMenuItem label="PRZYDZIEL ZASOBY" name="przydziel_zasoby" action="assign?faces-redirect=true" />
+                    </rich:panelMenuGroup>
+                </rich:panelMenuGroup>
+            </rich:panelMenu>
+            <a4j:outputPanel ajaxRendered="true">
+                <rich:panel rendered="#{not empty panelMenuBean.current}">
+                    <h:outputText value="#{panelMenuBean.current} selected"
+                        id="current" />
+                </rich:panel>
+            </a4j:outputPanel>
+        </h:panelGrid>
+    </h:form>
 	</ui:define>
 </ui:composition>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/templates/default.xhtml">
+	<ui:define name="content">
+
+		<h:form id="archiveform">
+		<h:panelGrid>
+		<rich:panel>
+		<f:facet name="header">#{msg.linkDelete}</f:facet>
+			<h:panelGrid columns="1">
+			<rich:panel>
+                Możesz usunąć archiwum ze Spisu Archiw Polskich.
+                Wybierz nazwę archiwum do usunięcia poniżej i kliknij OK.
+        </rich:panel>
+        <rich:panel>
+					<h:outputText value=" "/>
+					<h:selectOneRadio value="#{archiveBean.archiveId}">
+			 			<f:selectItems value="#{archiveBean.allArchives}" var="item"
+			 						itemLabel="#{item.name}" itemValue="#{item.id}" />
+						<f:ajax render="@form" />
+					</h:selectOneRadio>
+					<br />
+					<h:commandButton value="#{msg.linkDelete}" 
+					action="#{archiveBean.deleteArchive1}"/>
+			</rich:panel>
+			</h:panelGrid>
+			</rich:panel>
+			</h:panelGrid>
+			</h:form>
+	</ui:define>
+</ui:composition>

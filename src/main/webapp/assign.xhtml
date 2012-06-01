@@ -9,30 +9,32 @@
 
 	<ui:define name="content">
 		<h:form id="personForm">
+		<rich:panel>
+		<f:facet name="header">#{msg.linkAdd}</f:facet>
+		<rich:panel>
 			<h:panelGrid columns="2">
-
-				<h:outputText value=" Person " />
-				<h:selectOneMenu value="#{saleBean.personId}">
-					<f:selectItems value="#{saleBean.allPersons}" var="person"
-						itemValue="#{person.id}" itemLabel="#{person.firstName}" />
+				<h:outputText value="Archiwum" />
+				<h:selectOneMenu value="#{assignBean.archiveId}">
+					<f:selectItems value="#{assignBean.allArchives}" var="archive"
+						itemValue="#{archive.id}" itemLabel="#{archive.name}" />
 				</h:selectOneMenu>
 
-				<h:outputText value=" Car" />
-				<h:selectOneMenu value="#{saleBean.carId}">
-					<f:selectItems value="#{saleBean.availableCars}" var="car"
-						itemValue="#{car.id}" itemLabel="#{car.make} #{car.model}" />
+				<h:outputText value="Zbiór" />
+				<h:selectOneMenu value="#{assignBean.resourceId}">
+					<f:selectItems value="#{assignBean.obtainableResources}" var="res"
+						itemValue="#{res.id}" itemLabel="#{res.name}" />
 				</h:selectOneMenu>
-
-
+			
 			</h:panelGrid>
-
-			<h:commandButton value="Sell" action="#{saleBean.sellCar}" />
+			</rich:panel>
+			
+			<h:commandButton value="Przypisz" action="#{assignBean.assignResource}" />
 
 			<h:panelGrid>
 				<h:messages id="messages" showDetail="#{true}"
 					showSummary="#{false}" />
 			</h:panelGrid>
-
+		</rich:panel>
 		</h:form>
 
 	</ui:define>
